@@ -1,0 +1,15 @@
+{
+	"folders":
+	[
+		{
+			"follow_symlinks": true,
+			"folder_exclude_patterns" : ["Tpl"],
+			"file_exclude_patterns":[".git*","*.lof","*.md","*.out","*.fls","*.lot","*.fdb*","*.sync*","*.glo","*.toc","*.log","*.aux","*.pdf","*.cls",".*png","*.eps","*.graph*","*.dia","*.tmp"],
+			"path": "."
+		},
+		{
+			"file_exclude_patterns":["*.xml","*.txt","*.graph*"],
+			"path": "/Users/syamsul/Documents/Thesis-program/Ontologi"
+		}
+	]
+}

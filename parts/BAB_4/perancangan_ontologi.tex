@@ -1,0 +1,85 @@
+\section{Perancangan Ontologi}
+Sistem yang akan dibangun pada penelitian ini akan menggunakan tiga buah ontologi yang berbeda, masing-masing ontologi dapat diakses secara terpisah melalui protokol http. Adapun \emph{Namespace} yang akan digunakan untuk membangun ontologi yaitu:
+
+\begin{itemize}
+	\item \emph{Namespace} kelas adalah \emph{http://semanticweb.techtalk.web\-.id/ontology\#}
+	\item \emph{Namespace} \emph{Datatype property} dan \emph{Object property} adalah \emph{http://semanticweb.\\techtalk.web.id/ontology/property\#}
+	\item \emph{Namespace} individual adalah \emph{http://semanticweb.techtalk.web.id/resources\#}
+\end{itemize}
+% kelas dan individual atau \emph{instance} ketiga ontologi dalam penelitian ini yaitu \emph{http://semanticweb.techtalk.web\-.id/ontology\#}, sedangkan \emph{namespace} untuk \emph{Object property} dan \emph{Datatype property} adalah \emph{http://semanticweb.techtalk.web.id/ontology\-/property\#}.
+
+Kelas-kelas pada setiap ontologi memiliki tipe sederhana \emph{(simple class)} dan kelas kompleks \emph{(complex class)}. Kelas sederhana adalah kelas yang tidak memiliki restriksi, sedangkan kelas kompleks adalah kelas dengan tambahan restriksi tertentu. Salah satu contoh kelas kompleks misalnya kelas \emph{Wisata\_alam} dalam ontologi pariwisata diberikan restriksi dengan aturan seperti yang diperlihatkan dalam Persamaan \ref{eq:subclass_equation} dan \ref{eq:equivalent_equation}.
+
+\begin{equation}
+	Wisata\_alam \subseteq Wisata
+	\label{eq:subclass_equation}
+\end{equation}
+
+\begin{equation}
+	Wisata\_alam \equiv (Gunung \cup Pantai)
+	\label{eq:equivalent_equation}
+\end{equation}
+
+Persamaan \ref{eq:subclass_equation} menyatakan bahwa kelas \emph{Wisata\_alam} merupakan sub kelas dari kelas \emph{Wisata}, sedangkan Persamaan \ref{eq:equivalent_equation} menyatakan bahwa yang termasuk anggota kelas \emph{Wisata\_alam} adalah semua individu kelas \emph{Gunung} atau \emph{Pantai}, dengan kata lain \emph{Wisata\_alam} adalah obyek wisata pantai atau gunung, sehingga dengan demikian apabila terdapat sebuah pernyataan seperti yang diperlihatkan dalam Gambar \ref{fig:assertion} (baris 1 - 4), maka dapat diturunkan fakta bahwa ``Pantai Senggigi'' adalah objek wisata alam.
+
+\begin{figure}[hb]
+	\centering
+	\begin{lstlisting}[language=XML, numbers=left]
+<ClassAssertion>
+    <Class IRI="#Pantai"/>
+    <NamedIndividual IRI="#Pantai_senggigi"/>
+</ClassAssertion>
+
+<SubObjectPropertyOf>
+    <ObjectProperty IRI="/property#berada_di"/>
+    <ObjectProperty IRI="/property#terletak_di"/>
+</SubObjectPropertyOf>
+
+<ObjectPropertyAssertion>
+    <ObjectProperty abbreviatedIRI="prop:berada_di"/>
+    <NamedIndividual IRI="#Pantai_senggigi"/>
+    <NamedIndividual IRI="#Senggigi"/>
+</ObjectPropertyAssertion>\end{lstlisting}
+	\caption{Pernyataan \emph{Senggigi} memiliki destinasi \emph{Pantai\_senggigi} dan \emph{Pantai\_senggigi} berada di \emph{Senggigi}}
+	\label{fig:assertion}
+\end{figure}
+
+\emph{Datatype property} dan \emph{Object property} utama pada masing-masing ontologi menggunakan bahasa Indonesia yang kemungkinan paling sering muncul dalam proses pembentukan kalimat tanya oleh pengguna, hal ini dimaksudkan agar memudahkan proses pembentukan query SPARQL-DL, selain itu untuk setiap properti diberikan pula beberapa sub properti yang secara makna bahasa memiliki kesamaan seperti misalnya \emph{terletak\_di} secara makna memiliki kesamaan dengan \emph{berada\_di} sehingga \emph{berada\_di} dijadikan sebagai sub properti \emph{terletak\_di} sedangkan untuk semua sub properti yang secara hirarki berkedudukan sejajar diberikan relasi \emph{Equivalent property} sehingga dengan struktur seperti ini sistem akan dapat menemukan relasi implisit antar \emph{instance}. Misalnya terdapat pernyataan seperti yang ditunjukkan dalam Gambar \ref{fig:assertion} (baris 22 - 26), maka query SPARQL-DL \ref{fig:a} akan menghasilkan jawaban yang sama dengan \ref{fig:b} meskipun di dalam ontologi (Gambar \ref{fig:assertion}) tidak terdapat pernyataan eksplisit yang menyatakan bahwa \emph{Pantai\_senggigi} terletak di \emph{Senggigi}.
+
+\begin{figure}[hb]
+	\centering
+	\begin{subfigure}{1\linewidth}
+		\begin{lstlisting}
+PREFIX : <http://semanticweb.techtalk.web.id/ontology#>
+PREFIX prop:<http://semanticweb.techtalk.web.id/ontology/property#>
+
+SELECT ?lokasi WHERE {
+	PropertyValue(?lokasi,prop:terletak_di,:Senggigi)
+}\end{lstlisting}
+		\caption{Query dengan properti \emph{terletak\_di}}
+		\label{fig:a}
+	\end{subfigure}
+
+	\begin{subfigure}{1\linewidth}
+	\begin{lstlisting}	
+PREFIX : <http://semanticweb.techtalk.web.id/ontology#>
+PREFIX prop:<http://semanticweb.techtalk.web.id/ontology/property#>
+
+SELECT ?lokasi WHERE {
+	PropertyValue(?lokasi,prop:berada_di,:Senggigi)
+}\end{lstlisting}
+	\caption{Query dengan properti \emph{berada\_di}}
+	\label{fig:b}
+	\end{subfigure}
+	\caption{Query SPARQL-DL untuk mencari individu melalui relasi \emph{terletak\_di} dan \emph{berada\_di}}
+	\label{fig:sparqldl_query}
+\end{figure}
+
+\subsection{Peracangan \emph{dataset}}
+\emph{Dataset} yang merupakan data-data kabupaten diletakkan dalam berkas yang terpisah dengan ontologi dengan tujuan untuk memudahkan proses pengembangan. Setiap individual yang akan dimasukkan ke dalam dataset akan dicek terlebih dahulu di laman wikipedia. 
+
+Individual yang memiliki laman di wikipedia akan menggunakan URI yang sama dengan hasil mapping laman wikipedia ke dalam basis data DBPedia. Misalnya ``http://id.wikipedia.org/wiki/Kabupaten\_Lombok\_Timur'' dalam basis data DBPedia di transformasikan menjadi ``http://id.dbpedia.org/resource/Kabupaten\_Lombok\_Timur'' maka URI dalam \emph{dataset} menggunakan URI yang sama dengan DBPedia.
+
+\input{./parts/BAB_4/ontologi_pariwisata.tex}
+\input{./parts/BAB_4/ontologi_geografi.tex}
+\input{./parts/BAB_4/ontologi_pemerintahan.tex}

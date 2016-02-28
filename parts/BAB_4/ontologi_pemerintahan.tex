@@ -1,0 +1,80 @@
+\subsection{Ontologi Pemerintahan}
+Ontologi pemerintahan secara spesifik menyimpan fakta-fakta mengenai informasi pemerintahan pada tingkat pemerintah daerah, mulai dari tingkat desa hingga tingkat provinsi. Ontologi pemerintahan ditujukan untuk menjawab pertanyaan-pertanyaan seputar informasi pemerintahan seperti nama kepala dinas, kepala pemerintahan mulai dari desa hingga provinsi.
+
+Kelas yang akan dibangun dalam ontologi pemerintahan disajikan dalam Tabel \ref{tab:ontogov_class}. Ontologi pemerintahan terdiri dari dua buah kelas utama yaitu \emph{Orang} dan \emph{Pemerintah\_daerah}. Kelas \emph{Orang} adalah kelas yang bersifat umum yang terdiri dari sub-kelas dengan individual berupa pegawai negeri serta kepala-kepala daerah mulai dari tingkat desa (kepala desa) hingga provinsi (gubernur), sedangkan kelas \emph{Pemerintah\_daerah} adalah kelas yang membawahi kelas yang bersifat kelembagaan di tingkat daerah mulai dari desa hingga provinsi. Kelas \emph{Pemerintah\_daerah} bersifat \emph{disjoint} dengan kelas \emph{Orang} sehingga semua sub kelas keduanya juga secara tidak langsung bersifat \emph{disjoint}.
+
+Secara logika, jabatan gubernur, wakil gubernur, bupati, wakil bupati, wali kota, wakil wali kota dan kepala desa adalah merupakan jabatan politis sehingga tidak dimungkinkan sebuah individu yang sedang menjabat salah satu jabatan tersebut berstatus sebagai pegawai negeri, oleh karena itu kelas-kelas tersebut bersifat \emph{disjoint}. Selain itu, seorang pegawai negeri juga tidak mungkin menjabat sebagai camat atau kepala badan, kepala biro kepala dinas serta wakil camat dalam waktu yang bersamaan, sehingga kelas-kelas tersebut juga bersifat \emph{disjoint}.
+
+\begin{longtabu}{|c|l|X|}
+	\caption{Daftar kelas ontologi pemerintahan}\label{tab:ontogov_class} \\ \hline
+	\textbf{No} & \textbf{Nama Kelas} & \textbf{Ekspresi Restriksi} \\ \hline
+	\endfirsthead
+	\multicolumn{3}{c}%
+	{\tablename\ \thetable\ {(lanjutan)}} \\ \hline
+	\textbf{No} & \textbf{Nama Kelas} & \textbf{Ekspresi Restriksi} \\ \hline
+	\endhead
+	1	& 	Orang	&	\begin{math} \lnot(Pemerintah\_daerah) \end{math} \\ \hline 
+	2	&	Pemerintah\_daerah	&	\begin{math} \lnot(Orang) \end{math} \\ \hline
+	3	&	Pegawai\_negeri 	&	\begin{math} \equiv Orang \cap (\lnot (Gubernur \cup Bupati \cup Wali\_kota \cup \newline Wakil\_wali\_kota \cup Wakil\_gubernur \cup \newline Wakil\_bupati \cup Kepala\_desa)) \end{math} \\ \hline
+	4	&	Bupati	&	\begin{math} \equiv Orang \cap (\exists headOf.(Kabupaten)) \cap \newline (\lnot(Gubernur \cup Kepala\_desa \cup Wakil\_bupati \cup \newline Wakil\_gubernur \cup Wali\_kota \cup Wakil\_wali\_kota)) \end{math} \\ \hline
+	5	&	Gubernur	&	\begin{math} \equiv Orang \cap (\exists headOf.(Provinsi)) \cap (\lnot(Bupati \cup \newline Kepala\_desa \cup Wakil\_bupati \cup Wakil\_gubernur \cup \newline Wali\_kota \cup Wakil\_wali\_kota)) \end{math} \\ \hline
+	6	&	Kepala\_desa	&	\begin{math} \equiv Orang \cap (\exists headOf.(Desa)) \cap (\lnot(Gubernur \cup \newline Bupati \cup Wakil\_bupati \cup Wakil\_gubernur \cup \newline Wali\_kota \cup Wakil\_wali\_kota)) \end{math} \\ \hline
+	7	&	Wakil\_bupati	&	\begin{math} \equiv Orang \cap (\exists viceOf.(Bupati)) \cap (\lnot(Gubernur \cup \newline Kepala\_desa \cup Bupati \cup Wakil\_gubernur \cup \newline Wali\_kota \cup Wakil\_wali\_kota)) \end{math} \\ \hline
+	8	&	Wakil\_gubernur	&	\begin{math} \equiv Orang \cap (\exists viceOf.(Gubernur)) \cap (\lnot(Gubernur \cup \newline Kepala\_desa \cup Bupati \cup Wakil\_bupati \cup \newline Wali\_kota \cup Wakil\_wali\_kota)) \end{math} \\ \hline
+	9	&	Wakil\_wali\_kota	&	\begin{math} \equiv Orang \cap (\exists viceOf.(Wali\_kota)) \cap (\lnot(Gubernur \cup \newline Kepala\_desa \cup Bupati \cup Wakil\_gubernur \cup \newline Wali\_kota \cup Wakil\_bupati)) \end{math} \\ \hline
+	10	&	Wali\_kota	&	\begin{math} \equiv Orang \cap (\exists headOf.(Kota)) \cap (\lnot(Gubernur \cup \newline Kepala\_desa \cup Bupati \cup Wakil\_gubernur \cup \newline Wakil\_bupati \cup Wakil\_wali\_kota)) \end{math} \\ \hline
+	11	&	Camat	&	\begin{math} \equiv Pegawai\_negeri \cap (\exists headOf.(Kecamatan)) \cap \newline (\lnot(Kepala\_badan \cup Kepala\_biro \cup Kepala\_dinas \cup \newline Wakil\_camat)) \end{math} \\ \hline
+	12	&	Kelapa\_badan	&	\begin{math} \equiv Pegawai\_negeri \cap (\exists headOf.(Badan)) \cap \newline (\lnot(Camat \cup Kepala\_biro \cup Kepala\_dinas \cup \newline Wakil\_camat)) \end{math} \\ \hline
+	13	&	Kepala\_biro	&	\begin{math} \equiv Pegawai\_negeri \cap (\exists headOf.(Biro)) \cap \newline (\lnot(Kepala\_badan \cup Camat \cup Kepala\_dinas \cup \newline Wakil\_camat)) \end{math} \\ \hline
+	14	&	Kepala\_dinas	&	\begin{math} \equiv Pegawai\_negeri \cap (\exists headOf.(Dinas)) \cap \newline (\lnot(Kepala\_badan \cup Kepala\_biro \cup Camat \cup \newline Wakil\_camat)) \end{math} \\ \hline
+	15	&	Wakil\_camat	&	\begin{math} \equiv Pegawai\_negeri \cap (\exists viceOf.(Camat)) \cap \newline (\lnot(Kepala\_badan \cup Kepala\_biro \cup Kepala\_dinas \cup \newline Camat)) \end{math} \\ \hline
+	16	&	Badan	&	\begin{math} \equiv Pemerintah\_daerah \cap (\lnot(Biro \cup Dinas \cup Desa \cup Kabupaten \cup Kecamatan \cup Kota \cup Provinsi)) \end{math} \\ \hline
+	17	&	Biro	&	\begin{math} \equiv Pemerintah\_daerah \cap (\lnot(Kecamatan \cup Dinas \cup Desa \cup Kabupaten \cup Kecamatan \cup Kota \cup Provinsi)) \end{math} \\ \hline
+	18	&	Dinas	&	\begin{math} \equiv Pemerintah\_daerah \cap (\lnot(Biro \cup Badan \cup Desa \cup Kabupaten \cup Kecamatan \cup Kota \cup Provinsi)) \end{math} \\ \hline
+	19	&	Desa	&	\begin{math} \equiv Pemerintah\_daerah \cap (\lnot(Biro \cup Dinas \cup Badan \cup Kabupaten \cup Kecamatan \cup Kota \cup Provinsi)) \end{math} \\ \hline
+	20	&	Kabupaten	&	\begin{math} \equiv Pemerintah\_daerah \cap (\lnot(Biro \cup Dinas \cup Desa \cup Badan \cup Kecamatan \cup Kota \cup Provinsi)) \end{math} \\ \hline
+	21	&	Kecamatan	&	\begin{math} \equiv Pemerintah\_daerah \cap (\lnot(Biro \cup Dinas \cup Desa \cup Kabupaten \cup Badan \cup Kota \cup Provinsi)) \end{math} \\ \hline
+	22	&	Kota	&	\begin{math} \equiv Pemerintah\_daerah \cap (\lnot(Biro \cup Dinas \cup Desa \cup Kabupaten \cup Kecamatan \cup Badan \cup Provinsi)) \end{math} \\ \hline
+	23	&	Provinsi	&	\begin{math} \equiv Pemerintah\_daerah \cap (\lnot(Biro \cup Dinas \cup Desa \cup Kabupaten \cup Kecamatan \cup Kota \cup Badan)) \end{math} \\ \hline
+\end{longtabu}
+
+Selain kriteria \emph{disjoint}, beberapa kelas tertentu juga memiliki restriksi tambahan. Individu kelas \emph{Bupati} adalah individu yang memiliki hubungan \emph{headOf} dengan sebuah individu kelas \emph{Kabupaten}, individu kelas \emph{Gubernur} adalah individu yang memiliki hubungan \emph{headOf} dengan sebuah individu kelas \emph{Provinsi}, sedangkan untuk individu kelas wakil adalah individu yang memiliki hubungan \emph{viceOf} dengan sebuah individu yang diwakilinya seperti wakil gubernur adalah individu yang memiliki hubungan \emph{viceOf} dengan sebuah individu gubernur.
+
+Properti yang terdapat dalam ontologi pemerintahan hanya seputar properti yang mungkin dimiliki oleh orang dan pemerintahan. \emph{Object property} yang akan dibangun dalam ontologi pemerintahan disajikan dalam Tabel \ref{tab:ontogov_op}, sedangkan untuk \emph{Datatype property} yang akan dibangun disajikan dalam Tabel \ref{tab:ontogov_dp}.
+
+\begin{longtabu}{|c|l|X|}
+	\caption{Daftar \emph{Object property} ontologi pemerintahan}\label{tab:ontogov_op} \\ \hline
+	\textbf{No} & \textbf{Nama Properti} & \textbf{Ekspresi Restriksi} \\ \hline
+	\endfirsthead
+	\multicolumn{3}{c}%
+	{\tablename\ \thetable\ {(lanjutan)}} \\ \hline
+	\textbf{No} & \textbf{Nama Properti} & \textbf{Ekspresi Restriksi} \\ \hline
+	\endhead
+	1	&	kepala 	&	- \\ \hline
+	2	&	wakil\_dari	&	- \\ \hline
+	3	& 	hasVice	&	\begin{math} viceOf^- \end{math} \\ \hline 
+	4	&	headOf	&	\begin{math} hasHead^- \end{math} \\ \hline
+	5	&	pimpinan	&	\begin{math} \equiv hasHead \end{math} \newline \begin{math} \subseteq kepala \end{math} \\ \hline
+	6	&	hasHead	&	\begin{math} headOf^- \end{math} \newline \begin{math} \subseteq kepala \end{math} \newline \begin{math} \equiv pimpinan \end{math} \\ \hline
+	7	&	viceOf	&	\begin{math} viceOf^- \end{math} \newline \begin{math} \subseteq wakil\_dari \end{math} \\ \hline
+\end{longtabu}
+
+\begin{longtabu}{|c|l|X|}
+	\caption{Daftar \emph{Datatype property} ontologi pemerintahan}\label{tab:ontogov_dp} \\ \hline
+	\textbf{No} & \textbf{Nama Properti} & \textbf{Ekspresi Restriksi} \\ \hline
+	\endfirsthead
+	\multicolumn{3}{c}%
+	{\tablename\ \thetable\ {(lanjutan)}} \\ \hline
+	\textbf{No} & \textbf{Nama Properti} & \textbf{Ekspresi Restriksi} \\ \hline
+	\endhead
+	1	& 	alamat	&	- \\ \hline 
+	2	&	kode\_pos	&	- \\ \hline
+	3	&	telepon	&	- \\ \hline
+	4	&	website	&	- \\ \hline
+	5	&	hasAddress	&	\begin{math} \subseteq alamat \end{math} \\ \hline
+	6	&	postCode	&	\begin{math} \subseteq kode\_pos \end{math} \\ \hline
+	7	&	telp	&	\begin{math} \equiv hasPhone \end{math} \newline \begin{math} \subseteq telepon \end{math} \\ \hline
+	8	&	hasPhone	&	\begin{math} \equiv telp \end{math} \newline \begin{math} \subseteq telepon \end{math} \\ \hline
+	9	&	alamat\_website	&	\begin{math} \equiv hasWebsite \end{math} \newline \begin{math} \subseteq website \end{math} \\ \hline
+	10	&	hasWebsite	&	\begin{math} \equiv alamat\_website \end{math} \newline \begin{math} \subseteq website \end{math} \\ \hline
+\end{longtabu}

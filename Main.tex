@@ -1,0 +1,225 @@
+%Template pembuatan Tesis dengan ugmtesis.
+
+\documentclass[proposal]{ugmtesis}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{tabu}
+\usepackage{pdflscape}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsmath}
+
+\makeatletter
+\g@addto@macro\normalsize{%
+  \setlength\abovedisplayskip{0pt}
+  \setlength\belowdisplayskip{10pt}
+  \setlength\abovedisplayshortskip{0pt}
+  \setlength\belowdisplayshortskip{0pt}
+}
+\makeatother
+
+% Setting untuk listing code snippet
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+ 
+\lstdefinestyle{mystyle}{
+    % backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codegreen},
+    basicstyle=\ttfamily\scriptsize,
+    breakatwhitespace=false,
+    captionpos=b,
+    breaklines=false,
+    keepspaces=true,
+    numbers=none,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    xleftmargin=15pt,
+    tabsize=2
+}
+ 
+\lstset{style=mystyle}
+% end slisting setup
+
+\DeclareGraphicsExtensions{.png}
+\graphicspath{{./Img/}}
+%-----------------------------------------------------------------
+%Disini awal masukan untuk data tesis
+%-----------------------------------------------------------------
+\titleind{RANCANG BANGUN \emph{PLUGIN} PROTEGE UNTUK MEMPEROSES \emph{QUERY OWL-DL} MENGGUNAKAN BAHASA ALAMI}
+
+% \titleeng{PROCESS DESIGN QUERY PROTEGE PLUGIN OWL-DL USING NATURAL LANGUAGE}
+
+\fullname{MUHAMMAD FAHRURROZI}
+
+\idnum{13/356409/PPA/04393}
+
+\examdate{}
+
+\degree{Master of Computer Science}
+
+\yearsubmit{2016}
+
+\program{Ilmu Komputer}
+
+\headprogram{Dr. Tri Kuntoro Priyambodo, M.Sc}
+
+\dept{Ilmu Komputer}
+
+\firstsupervisor{Dr. tech. Khabib Mustofa, S.Si., M.Kom}
+
+\firstexaminer{Dr. Tri Kuntoro Priyambodo, M.Sc}
+
+\secondexaminer{Dr. tech. Ahmad Ashari, M.I.Kom}
+
+\thirdexaminer{Dr. Azhari SN, M.T}
+
+%-----------------------------------------------------------------
+%Disini akhir masukan untuk data tesis
+%-----------------------------------------------------------------
+
+\begin{document}
+% ------------------------------------------------------------------------
+% setting untuk listing coding OWL
+% ------------------------------------------------------------------------
+\lstset{language=XML, breaklines=true, keepspaces=true, columns=flexible}
+% ------------------------------------------------------------------------
+
+% \cover
+
+\titlepageind 
+
+% \approvalpage
+
+% \declarepage
+
+%-----------------------------------------------------------------
+%Disini awal masukan Acknowledment
+%-----------------------------------------------------------------
+% \acknowledment
+% \begin{flushright}
+% \Large\emph\cal{Karya sederhana ini kupersembahkan \\
+% buat Bapak, Ibu, \\dan Adik-adikku tercinta}
+% \end{flushright}
+%-----------------------------------------------------------------
+%Disini akhir masukan untuk muka tesis
+%-----------------------------------------------------------------
+
+%-----------------------------------------------------------------
+%Disini awal masukan Motto
+%-----------------------------------------------------------------
+% \motto
+% \emph{Sesungguhnya dalam penciptaan langit dan bumi, dan silih bergantinya
+% malam dan siang terdapat tanda-tanda bagi orang-orang yang berakal, (yaitu)
+% orang-orang yang mengingat Allah sambil berdiri atau duduk atau dalam keadaan
+% berbaring dan mereka memikirkan tentang penciptaan langit dan bumi (seraya
+% berkata) : Ya Tuhan kami, tiadalah Engkau menciptakan ini dengan sia-sia, Maha
+% Suci Engkau, maka peliharalah kami dari siksa neraka.}
+
+% \begin{flushright}
+% (Q.S. Ali Imran : 190 - 191)
+% \end{flushright}
+
+% \emph{Maka apabila kamu telah selesai (dari sesuatu urusan), kerjakanlah
+% dengan sungguh-sungguh (urusan) yang lain.}
+
+% \begin{flushright}
+% (Q.S. Alam Nasyrah : 7)
+% \end{flushright}
+%-----------------------------------------------------------------
+%Disini akhir masukan untuk Motto
+%-----------------------------------------------------------------
+
+%-----------------------------------------------------------------
+%Disini awal masukan untuk Prakata
+%-----------------------------------------------------------------
+% \preface
+% Segala puji dan syukur semata-mata hanya untuk Allah SWT, karena atas segala
+% rahmat, hidayah dan bantuan-Nya jualah maka akhirnya Tesis dengan judul
+% Sistem \emph{Question Answering} Data Kabupaten di Nusa Tenggara Barat Berbasis \emph{Multi-Ontologi} ini telah selesai penulis susun.
+
+% Telah banyak bantuan yang penulis peroleh selama dalam penulisan Tesis ini, untuk itu tak lupa penulis ucapkan terima kasih yang sebesar-besarnya kepada:
+
+% \begin{enumerate}
+%     \item DR techn. Khabib Mustofa yang telah dengan sabar membimbing penulis hingga Tesis ini selesai,
+%     \item Segenap staf dan karyawan program Pascasarjana Ilmu Komputer FMIPA UGM, yang telah banyak bekerjasama dengan penulis selama belajar di Pascasarjana Ilmu Komputer UGM,
+%     \item Bapak dan Ibu yang selama ini telah sabar membimbing dan mendoakan penulis tanpa kenal lelah untuk selama-lamanya.
+% \end{enumerate}
+
+% Penulis sangat menyadari tentunya Tesis ini tidak lepas dari kekurangan maupun kelemahan, untuk itu segala kritik dan saran yang sifatnya membangun demi melengkapi segala kekurangan dan kelemahan Tesis ini tentu sangat Penulis harapkan. Semoga karya ilmiah ini bermanfaat khususnya bagi Penulis sendiri maupun pengembangan dalam bidang Ilmu Komputer khususnya dalam bidang pencarian semantik web.
+
+% \begin{tabular}{p{7.5cm}c}
+% &Yogyakarta, 25 Februari 2016\\
+% &\\
+% &\\
+% &Penulis
+% \end{tabular}
+%-----------------------------------------------------------------
+%Disini akhir masukan Prakata
+%-----------------------------------------------------------------
+
+\tableofcontents
+\listoftables
+\listoffigures
+% \lambang
+
+%-----------------------------------------------------------------
+%Disini awal masukan Intisari
+%-----------------------------------------------------------------
+%\include{./parts/ABSTRACT_ID}
+%-----------------------------------------------------------------
+%Disini akhir masukan Intisari
+%-----------------------------------------------------------------
+
+%-----------------------------------------------------------------
+%Disini awal masukan untuk Abstract
+%-----------------------------------------------------------------
+%\include{./parts/ABSTRACT_EN}
+%-----------------------------------------------------------------
+%Disini akhir masukan Abstract
+%-----------------------------------------------------------------
+
+%-----------------------------------------------------------------
+% Main Contents goes here
+%-----------------------------------------------------------------
+\include{./parts/BAB_1}
+\include{./parts/BAB_2}
+% \include{./parts/BAB_3}
+% \include{./parts/BAB_4}
+%\include{./parts/BAB_5}
+%\include{./parts/BAB_6}
+%\include{./parts/BAB_7}
+%----------------------------------------------------------------
+% End of Main Contents
+%----------------------------------------------------------------
+
+%-----------------------------------------------------------------
+% Daftar Pustaka
+%-----------------------------------------------------------------
+\include{./parts/DAFTAR_PUSTAKA}
+%-----------------------------------------------------------------
+% End of Daftar Pustaka
+%-----------------------------------------------------------------
+
+%-----------------------------------------------------------------
+% Lampiran
+%-----------------------------------------------------------------
+%\appendix
+%\include{./parts/LAMPIRAN/lampiran_a}
+%\include{./parts/LAMPIRAN/lampiran_b}
+%\include{./parts/LAMPIRAN/lampiran_c}
+%\include{./parts/LAMPIRAN/lampiran_d}
+%-----------------------------------------------------------------
+% end of Lampiran
+%-----------------------------------------------------------------
+
+\end{document}

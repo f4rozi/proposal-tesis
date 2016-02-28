@@ -1,0 +1,75 @@
+\section{Gramatika}
+Grammar suatu bahasa dapat dilihat sebagai suatu aturan yang menentukan apakah suatu kumpulan kata dapat diterima sebagai kalimat oleh bahasa tersebut. Sebuah bahasa L dapat dijelaskan sebagai satu kumpulan \emph{string}, dimana \emph{string} dibentuk dari bagian terkecil yang disebut dengan \emph{symbol}. Kelompok tertentu v dari \emph{symbol} biasa dikenal sebagai alfabet atau perbendaharaan kata. Sebuah kalimat yang dapat dikenali dibentuk dengan berdasarkan aturan-aturan tata bahasa yang biasa disebut \emph{grammar}.
+
+Sebuah \emph{grammar} G dapat dibentuk dari empat buah \emph{tuple} yaitu: simbol non-terminal, simbol terminal, simbol awalan dan aturan penulisan atau \emph{rule} sehingga dapat ditulisakan sebagai $G=(vn, vt, s, p)$. Contoh pembentukan kalimat dengan mengacu pada \emph{grammar} G sederhana dapat dilihat dalam Gambar \ref{fig:pembentukan_grammar_g}.
+
+\begin{figure}[ht]
+	\centering
+	\begin{lstlisting}[language=Prolog,xleftmargin=0pt]
+		DictJenis = {Kata_Benda,Kata_Kerja,Frasa_Benda,Frasa_Kerja,Keterangan}
+		DictKata = {Orang,Makan,Telur,Ayam,Terbang,Tinggi}
+		
+		dengan aturan:
+	
+		s           -> Frasa_Benda Frasa_Kerja
+		Frasa_Benda -> Kata_Benda Kata_Benda
+		Frasa_Kerja -> Kata_Kerja Keterangan
+		Kata_Benda  -> {Orang,Telur,Ayam}
+		Kata_Kerja  -> {Makan,Terbang}
+		Keterangan  -> {Tinggi}
+		
+		Dari grammar G dapat dibentuk kalimat:
+	
+		Orang Makan Ayam
+		Ayam Terbang Tinggi
+		Orang Terbang Tinggi
+		Ayam Makan Orang\end{lstlisting}
+\caption{Contoh pembentukan kalimat dengan aturan gramatika}
+\label{fig:pembentukan_grammar_g}
+\end{figure}
+
+Semua kalimat tersebut apabila dicari pembentukannya melalui \emph{grammar} G dapat dikatakan benar, akan tetapi harus diingat bahwa kalimat dengan \emph{grammar} yang benar hanya berarti benar secara struktural bukan berarti selalu benar dalam makna. Seperti kalimat ketiga yang hanya benar apabila berada dalam konteks `'orang memakai alat`' misalnya pesawat terbang. Sedangkan kalimat keempat malah sama sekali tidak mungkin dapat dimengerti maknanya, selain hanya akan menimbulkan tanda tanya bagi yang membaca. Dari \emph{grammar} kita dapat mempelajari bahasa dari segi struktur dan bukan dari segi makna bahasa itu sediri.
+
+\citet{bar_feigenbaum} membagi \emph{grammar} ke dalam empat kelompok berdasarkan bentuk penulisan aturan produksi yaitu:
+\begin{enumerate}
+	\item \emph{Recursive enumerable grammar}\\
+	\emph{Recursive enumerable grammar} atau tipe 0 merupakan tipe yang tidak membatasi jumlah simbol terminal dan non terminal untuk kedua sisi aturan produksinya. Kemampuan ekspresi \emph{(expressive power)} dari \emph{grammar} tipe ini sama dengan mesin turing.
+	\item \emph{Contex-sensitive grammar}\\
+	\emph{Context-sensitve grammar} atau \emph{grammar} tipe 1 memiliki ketentuan dimana simbol sisi kanan lebih banyak atau sama dengan simbol sisi kiri. \emph{Grammar} ini mampu merepresentasikan bahasa seperti $a\textsuperscript{n}b\textsuperscript{n}c\textsuperscript{n}$. Contoh \emph{grammar} tipe ini dapat dilihat dalam Gambar \ref{fig:contoh_csg}.
+	\begin{figure}[ht]
+		\centering
+		\captionsetup{width=0.85\textwidth}
+		\begin{lstlisting}[xleftmargin=30pt]
+			S  -> aSBC
+			S  -> aBC
+			CB -> BC
+			aB -> ab
+			bB -> bb
+			bC -> bc
+			cC -> cc\end{lstlisting}
+		\caption{Contoh \emph{Context-sensitive grammar} \citep{bar_feigenbaum}}
+		\label{fig:contoh_csg}
+	\end{figure}
+
+	\item \emph{Contex-free grammar}\\
+	Merupakan \emph{grammar} tipe 2 merupakan \emph{grammar} yang memiliki ciri yaitu sisi kiri hanya memiliki satu buah simbol non-terminal. Tiap-tiap aturan produksi dapat membuat simbol non-terminal dengan konteks yang bebas pada sisi sebelah kanan. \emph{Context-free grammar} populer digunakan untuk \emph{grammar} bahasa alami meskipun konstruksi beberapa bahasa alami tidak bersifat \emph{context-free}. Contoh \emph{grammar} tipe ini dapat dilihat dalam Gambar \ref{fig:contoh_cfg} berikut:
+	\begin{figure}[hb]
+		\centering
+		\captionsetup{width=0.85\textwidth}
+		\begin{lstlisting}[xleftmargin=30pt]
+			<SENTENCE>    -> <NOUN PHRASE> <VERB PHRASE>
+			<NOUN PHRASE> -> <DETERMINER> <NOUN>
+			<NOUN PHRASE> -> <NOUN>
+			<VERB PHRASE> -> <VERB><NOUN PHRASE>
+			<DETERMINER>  -> the
+			<NOUN> 		  -> boys
+			<NOUN>		  -> apples
+			<VERB>		  -> eat\end{lstlisting}
+		\caption{Contoh penulisan aturan CFG untuk membentuk kalimat \citep{bar_feigenbaum}}
+		\label{fig:contoh_cfg}
+	\end{figure}
+
+
+	\item \emph{Regular grammar}\\
+	\emph{Regular grammar} atau tipe 3 adalah \emph{grammar} yang memiliki batasan yang paling ketat. Masing-masing aturan produksi memiliki sebuah simbol non-terminal pada sisi kiri. Masing-masing aturan produksi memiliki sebuah simbol terminal yang secara opsional dapat diikuti oleh sebuah simbol non-terminal pada sisi kanan.
+\end{enumerate}

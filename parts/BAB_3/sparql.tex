@@ -1,0 +1,103 @@
+\section{SPARQL \emph{(Sparql Query Language)}}
+SPARQL (diucapkan: ``sparkl'') adalah bahasa \emph{query} RDF \emph{(Resource Description Framework)} dan protokol untuk semantik web \citep{liyang_yu}. Secara harfiah, SPARQL adalah bahasa \emph{query} yang dapat kita gunakan untuk melakukan \emph{query} terhadap data dalam bentuk RDF dan SPARQL juga menyediakan protokol yang perlu kita ikuti jika ingin melakukan \emph{query} terhadap \emph{remote} RDF \citep{liyang_yu}. Tim Berners-Lee melalui \citet{ducharme} mengungkapkan ``Mencoba menggunakan semantik web tanpa SPARQL sama seperti menggunakan basis data relasional tanpa SQL''.
+
+Rekomendasi W3C \emph{World Wide Web Consortium} mengenai SPARQL terdiri dari tiga bagian, yaitu:
+
+\begin{enumerate}
+	\item \emph{SPARQL query language specification} yang membahas mengenai inti dari bahasa \emph{query} SPARQL.
+	\item \emph{SPAQRL Query XML Result Format specification} yang membahas mengenai format standar dari kembalian hasil \emph{query}.
+	\item \emph{SPAQRL Protocol for RDF spesification} yang membahas mengenai protokol standar untuk mengakses RDF di lokasi yang berbeda \emph{(remote)}.
+\end{enumerate}
+
+Sparql terdiri dari empat buah bentuk \emph{query}, yaitu (1) SELECT, (2) ASK, (3) DESCRIBE dan (4) CONSTRUCT. Diantara keempat bentuk \emph{query} tersebut yang paling banyak digunakan adalah SELECT.
+
+\subsection{\emph{SELECT Query}}
+SELECT merupakan bentuk \emph{query} yang paling sering digunakan. Kebanyakan fiturnya juga digunakan pada bentuk \emph{query} lainnya (ASK, DESCRIBE dan CONSTRUCT). Bentuk dasar \emph{query SELECT} dapat dilihat pada Gambar \ref{fig:bentuk_query_select}.
+\begin{figure}[hb]
+	\centering
+	\begin{lstlisting}[language=SQL, xleftmargin=15pt, numbers=left]
+ 	BASE <URI>
+ 	PREFIX pref: <URI>
+ 	...
+ 	SELECT <variabel1> <variabel2>
+ 	FROM <endpoint>
+ 	WHERE {
+ 		...
+ 	}\end{lstlisting} 
+	\caption{Bentuk dasar \emph{query SELECT} \citep{liyang_yu}}
+	\label{fig:bentuk_query_select}
+\end{figure}
+
+Query \emph{SELECT} diawali dengan mendefinisikan sebuah \emph{base} URI kemudian diikuti dengan \emph{PREFIX}. Jumlah \emph{PREFIX} tidak dibatasi sesuai dengan jumlah URI yang akan dilibatkan dalam melakukan \emph{query}. \emph{PREFIX} dapat pula tidak disertakan karena bersifat opsional. Jika tidak menggunakan \emph{PREFIX} maka \emph{URI} harus diuliskan dengan lengkap.
+
+Klausa \emph{SELECT} digunakan untuk melakukan \emph{binding} terhadap data untuk menentukan data apa saja yang akan dikembalikan sebagai hasil \emph{query}. Klausa \emph{FROM} diletakkan setelah klausa \emph{SELECT}. Klausa ini berfungsi untuk menentukan alamat \emph{endpoint} yang akan dikenakan \emph{query}.
+
+Bentuk \emph{query SELECT} sederhana ditunjukkan dalam Gambar \ref{fig:sparql_select_1}. Baris pertama mendeklarasikan \emph{base} URI, dimana \emph{base} URI merupakan alamat URI umum yang akan dijadikan acuan oleh semua URI yang dituliskan secara relatif di dalam \emph{query}. Pada Gambar \ref{fig:sparql_select_1}, URI relatif ditunjukkan dalam baris ke-6 dimana alamat URI lengkap dari <\#danbri> adalah <http://danbri.org/foaf.org\#danbri>. Perhatikan pada baris ke dua dalam Gambar \ref{fig:sparql_select_1} dapat dihilangkan karena bersifat opsional dan tidak pernah diacu dalam \emph{statement where}.
+
+\begin{figure}[hb]
+	\centering
+	\begin{lstlisting}[language=SQL, numbers=left]
+	base <http://danbri.org/foaf.rdf>
+	PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+	select * from <http://danbri.org/foaf.rdf>
+	where {
+		<#danbri> ?propery ?value .
+	}\end{lstlisting}
+	\caption{Contoh klausa SELECT dalam \emph{query} SPARQL \citep{liyang_yu}}
+	\label{fig:sparql_select_1}
+\end{figure}
+
+Contoh lain penggunaan klausa \emph{SELECT} dalam \emph{query} SPARQL dapat dilihat dalam Gambar \ref{fig:sparql_select_2}. \emph{Query} yang ditunjukkan dalam Gambar \ref{fig:sparql_select_2} terdiri dari tiga buah \emph{graph pattren} masing-masing ditunjukkan dalam baris 7, 8 dan 9. Berbeda dengan contoh sebelumnya, pada contoh ke dua ini \emph{PREFIX} tidak dapat dihilangkan karena digunakan dalam klausa \emph{where}. 
+
+\begin{figure}[ht]
+	\centering
+	\begin{lstlisting}[language=SQL,numbers=left]
+	base <http://danbri.org/foaf.rdf>
+	PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+	PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+	select * from <http://danbri.org/foaf.rdf>
+	where {
+		<#danbri> foaf:knows ?friend .
+		?friend foaf:depiction ?picture .
+		?picture dc:format ?imageFormat .
+	}\end{lstlisting}
+	\caption{Klausa \emph{SELECT} dengan banyak \emph{graph-pattern} \citep{liyang_yu}}
+	\label{fig:sparql_select_2}
+\end{figure}
+
+\emph{Query} pada Gambar \ref{fig:sparql_select_2} akan menampilkan semua variabel yang terdapat di dalam klausa \emph{where}. Jika hanya ingin menampilkan variabel tertentu maka tanda ``*'' pada baris ke enam diganti dengan nama variabel yang ingin ditampilkan. Contoh \emph{query} seperti ini dapat dilihat pada Gambar \ref{fig:sparql_select_3}.
+
+\begin{figure}[hb]
+	\centering
+	\begin{lstlisting}[language=SQL,numbers=left]
+	base <http://danbri.org/foaf.rdf>
+	PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+	PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+	select ?friend,?image from <http://danbri.org/foaf.rdf>
+	where {
+		<#danbri> foaf:knows ?friend .
+		?friend foaf:depiction ?picture .
+		?picture dc:format ?imageFormat .
+	}\end{lstlisting}
+	\caption{Query untuk menampilkan nama dan foto}
+	\label{fig:sparql_select_3}
+\end{figure}
+
+\subsection{\emph{Query} Terhadap Multi-Graph}
+Contoh \emph{query} yang telah kita lihat pada sub bab sebelumnya hanya melibatkan \emph{graph} tunggal saja, namun demikian SPARQL memungkinkan kita untuk melakukan \emph{query} terhadap banyak \emph{graph} sekaligus dengan menggunakan metode \emph{named graph}.
+
+Sebelum melakukan \emph{query} terhadap multi \emph{graph}, hal yang perlu diperhatikan adalah menyiapkan daftar \emph{named graph} yang akan kita \emph{query}. Definisi \emph{named graph} ditunjukkan dalam Gambar \ref{fig:definisi_named_graph}. Baris 2 dan 3 pada potongan \emph{query} dalam Gambar \ref{fig:definisi_named_graph} merupakan alamat URI graph yang akan dikenakan \emph{query}.
+
+\begin{figure}[ht]
+	\centering
+	\begin{lstlisting}[language=SQL, numbers=left]
+	select *
+	from named <uri>
+	from named <uri>
+	...\end{lstlisting}
+	\caption{Konstruksi \emph{query} terhadap multi \emph{named graph} \citep{liyang_yu}}
+	\label{fig:definisi_named_graph}
+\end{figure}

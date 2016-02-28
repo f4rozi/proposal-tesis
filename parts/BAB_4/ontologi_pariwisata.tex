@@ -1,0 +1,92 @@
+\subsection{Ontologi pariwisata}
+Ontologi pariwisata secara spesifik memuat fakta-fakta mengenai pariwisata yang terdapat di setiap daerah. Cakupan informasi yang ingin dicapai dalam ontologi pariwisata yaitu informasi seputar nama-nama tempat wisata, informasi mengenai destinasi wisata budaya, wisata belanja, termasuk informasi mengenai akomodasi berupa penginapan yang terdapat di sekitar destinasi serta informasi mengenai transportasi untuk mencapai tempat wisata. Adapun kelas yang akan dibuat dalam ontologi pariwisata diperlihatkan dalam Tabel \ref{tab:ontopar_class}.
+
+Ontologi pariwisata terdiri dari lima buah kelas sederhana dan enam belas buah kelas kompleks. Kelas-kelas sederhana adalah kelas yang digunakan untuk mendefinisikan konsep yang bersifat umum, sedangkan kelas kompleks adalah kelas yang digunakan untuk mendefinisikan konsep yang lebih spesifik. Konsep-konsep umum yang terdapat di dalam ontologi pariwisata adalah \emph{Akomodasi, Pantai, Gunung, Produk} dan \emph{Wisata}. Sub kelas \emph{Wisata} merupakan kelas-kelas dengan spesifikasi yang sangat spesifik, untuk itu diberikan restriksi seperti yang ditunjukkan pada baris ke 17 - 21 dalam Tabel \ref{tab:ontopar_class}. Individual kelas \emph{Wisata} dan semua sub-kelasnya tidak akan diberikan secara langsung, melainkan hanya akan didapatkan dari proses \emph{reasoning}.
+
+\begin{longtabu}{|l|l|X|}
+	\caption{Daftar kelas ontologi pariwisata}\label{tab:ontopar_class} \\ \hline
+	\textbf{No} & \textbf{Nama Kelas} & \textbf{Ekspresi Restriksi} \\ \hline
+	\endfirsthead
+	\multicolumn{3}{c}%
+	{\tablename\ \thetable\ {(lanjutan)}} \\ \hline
+	\textbf{No} & \textbf{Nama Kelas} & \textbf{Ekspresi Restriksi} \\ \hline
+	\endhead
+	1	& 	Akomodasi	&	- \\ \hline 
+	2	&	Gunung	&	- \\ \hline
+	3	&	Pantai	&	- \\ \hline
+	4	&	Produk	&	- \\ \hline
+	5	&	Wisata	&	- \\ \hline
+	6	&	Penginapan	&	\begin{math}\equiv Akomodasi \cap \lnot(Transportasi) \end{math} \\ \hline
+	7	&	Hotel 	&	\begin{math}\equiv Penginapan \cap (\lnot(Losmen \cup Villa)) \end{math} \\ \hline
+	8	&	Losmen	&	\begin{math}\equiv Penginapan \cap (\lnot(Hotel \cup Villa)) \end{math} \\ \hline
+	9	&	Villa	&	\begin{math}\equiv Penginapan \cap (\lnot(Losmen \cup Hotel)) \end{math} \\ \hline
+	10	&	Transportasi	&	\begin{math}\equiv Akomodasi \cap \lnot(Penginapan) \end{math} \\ \hline
+	11	&	Tradisi	&	\begin{math}\equiv (Budaya \cap Produk) \end{math} \\ \hline
+	12	&	Kuliner	&	\begin{math}\equiv Produk \cap (\lnot(Kuliner \cup Souvenir)) \end{math} \\ \hline
+	13	&	Makanan	&	\begin{math}\equiv Kuliner \cap \lnot(Minuman) \end{math} \\ \hline
+	14	&	Minuman	&	\begin{math}\equiv Kuliner \cap \lnot(Makanan) \end{math} \\ \hline
+	15	&	Souvenir	&	\begin{math}\equiv Produk \cap (\lnot(Budaya \cap Kuliner)) \end{math} \\ \hline
+	16	&	Budaya	&	\begin{math}\equiv Tradisi \end{math} \newline \begin{math}\equiv Produk \cap (\lnot(Kuliner \cup Souvenir)) \end{math} \\ \hline
+	17	&	Wisata\_alam	&	\begin{math}\subseteq Wisata \end{math} \newline \begin{math}\equiv \exists hasDestination.(Pantai \cup Gunung) \subseteq \top \end{math} \\ \hline
+	18	&	Wisata\_pantai	&	\begin{math} \subseteq Wisata\_alam \end{math} \newline \begin{math}\equiv \exists hasDestination.Pantai \subseteq \top  \end{math} \\ \hline
+	19	&	Wisata\_belanja	&	\begin{math}\subseteq Wisata \end{math} \newline \begin{math}\equiv \exists hasProduct.(Kuliner \cup Souvenir) \subseteq \top \end{math} \\ \hline
+	20	&	Wisata\_kuliner	&	\begin{math} \subseteq Wisata\_belanja \end{math} \newline \begin{math}\equiv \exists hasProduct.Kuliner \subseteq \top  \end{math} \\ \hline
+	21	&	Wisata\_budaya	&	\begin{math}\subseteq Wisata \end{math} \newline \begin{math}\equiv \exists hasRitual.Budaya \subseteq \top \end{math} \\ \hline
+\end{longtabu}
+
+Selanjutnya adalah menentukan \emph{Datatype property} yang akan dibuat dalam ontologi pariwisata. Berdasarkan analisa cakupan pengetahuan yang ingin dicapai dalam ontologi pariwisata maka \emph{Datatype property} yang akan dibuat dalam ontologi pariwisata disajikan dalam Tabel \ref{tab:ontopar_dp}. 
+
+\begin{longtabu}{|l|l|X|}
+	\caption{Daftar \emph{Datatype property} ontologi pariwisata}\label{tab:ontopar_dp} \\ \hline
+	\textbf{No} & \textbf{Nama Properti} & \textbf{Ekspresi Restriksi} \\ \hline
+	\endfirsthead
+	\multicolumn{3}{c}%
+	{\tablename\ \thetable\ {(lanjutan)}} \\ \hline
+	\textbf{No} & \textbf{Nama Properti} & \textbf{Ekspresi Restriksi} \\ \hline
+	\endhead
+	1	& 	alamat	&	- \\ \hline 
+	2	&	harga\_kamar 	&	- \\ \hline
+	3	&	kode\_pos	&	- \\ \hline
+	4	&	nama	&	- \\ \hline
+	5	&	rating	&	- \\ \hline
+	6	&	tarif	&	- \\ \hline
+	7	&	telepon	&	- \\ \hline
+	8	&	website	&	- \\ \hline
+	9	&	hasAddress	&	\begin{math} \subseteq alamat \end{math} \\ \hline
+	10	&	postCode	&	\begin{math} \subseteq kode\_pos \end{math} \\ \hline
+	11	&	hasName	&	\begin{math} \subseteq nama \end{math} \\ \hline
+	12	&	rate	&	\begin{math} \subseteq tarif \end{math} \\ \hline
+	13	&	roomRate	&	\begin{math} \subseteq harga\_kamar \end{math} \newline \begin{math} \equiv tarif\_kamar \end{math} \\ \hline
+	14	&	tarif\_kamar	&	\begin{math} \subseteq harga\_kamar \end{math} \newline \begin{math} \equiv hasAddress \end{math} \\ \hline
+	15	&	bintang	&	\begin{math} \subseteq rating \end{math} \newline \begin{math} \equiv hasRating \end{math} \\ \hline
+	16	&	hasRating	&	\begin{math} \subseteq rating \end{math} \newline \begin{math} \equiv bintang \end{math} \\ \hline
+	17	&	telp	&	\begin{math} \subseteq telepon \end{math} \newline \begin{math} \equiv hasPhone \end{math} \\ \hline
+	18	&	hasPhone	&	\begin{math} \subseteq telepon \end{math} \newline \begin{math} \equiv telp \end{math} \\ \hline
+	19	&	alamat\_website	&	\begin{math} \subseteq website \end{math} \newline \begin{math} \equiv hasWebsite \end{math} \\ \hline
+	20	&	hasWebsite	&	\begin{math} \subseteq website \end{math} \newline \begin{math} \equiv alamat\_website \end{math} \\ \hline
+\end{longtabu}
+
+Ontologi pariwisata juga memiliki \emph{Object property} seperti yang disajikan dalam Tabel \ref{tab:ontopar_op}. Properti \emph{isLocationOf} merupakan \emph{inverse} dari \emph{hasLocation} sedangkan properti \emph{hasLocation} sendiri memiliki karakteristik ekivalen dengan properti \emph{ada\_di, berada\_di} dan \emph{letak} sehingga secara tidak langsung properti \emph{ada\_di, berada\_di} dan \emph{letak} juga merupakan \emph{inverse} dari \emph{isLocationOf}.
+
+\begin{longtabu}{|l|l|X|}
+	\caption{Daftar \emph{Object property} ontologi pariwisata}\label{tab:ontopar_op} \\ \hline
+	\textbf{No} & \textbf{Nama Properti} & \textbf{Ekspresi Restriksi} \\ \hline
+	\endfirsthead
+	\multicolumn{3}{c}%
+	{\tablename\ \thetable\ {(lanjutan)}} \\ \hline
+	\textbf{No} & \textbf{Nama Properti} & \textbf{Ekspresi Restriksi} \\ \hline
+	\endhead
+	1	& 	destinasi	&	- \\ \hline 
+	2	&	hasAttraction	&	- \\ \hline
+	3	&	hasProduct	&	- \\ \hline
+	5	&	terletak\_di	&	- \\ \hline
+	4	&	hasRitual	&	\begin{math} \equiv hasTradition \end{math} \\ \hline
+	8	&	hasTradition	&	\begin{math} \equiv hasRitual \end{math} \\ \hline
+	9	&	isLocationOf	&	\begin{math} \equiv hasLocation^- \end{math} \\ \hline
+	6	&	hasDestination	&	\begin{math} \subseteq destinasi \end{math} \newline \begin{math} \equiv tujuan \end{math} \\ \hline
+	7	&	tujuan 	&	\begin{math} \subseteq destinasi \end{math} \newline \begin{math} \equiv hasDestination \end{math} \\ \hline
+	10	&	ada\_di	&	\begin{math} \subseteq terletak\_di \end{math} \newline \begin{math} \equiv (berada\_di \cup hasLocation \cup letak) \end{math} \\ \hline
+	11	&	berada\_di	&	\begin{math} \subseteq terletak\_di \end{math} \newline \begin{math} \equiv (ada\_di \cup hasLocation \cup letak) \end{math} \\ \hline
+	12	&	hasLocation	&	\begin{math} \subseteq terletak\_di \end{math} \newline \begin{math} \equiv (berada\_di \cup ada\_di \cup letak) \end{math} \newline \begin{math}\equiv isLocationOf^- \end{math} \\ \hline
+	13	&	letak	&	\begin{math} \subseteq terletak\_di \end{math} \newline \begin{math} \equiv (berada\_di \cup hasLocation \cup ada\_di) \end{math} \\ \hline
+\end{longtabu}

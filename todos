@@ -1,0 +1,7 @@
+TODOS:
+
+- tambahkan terori SPARQL-DL di bab 3
+- ganti screenshot kelas dan object properti di bab 5 (karena ada perubahan struktur) // penggantian dilakukan setelah testing implementasi!!
+
+- komentari kenapa ibu kota tidak disjoint dengan kota (karena ada kemungkinan kota sama dengan ibu kota nya, contoh mataram)
+- bahas mengenai ekspresi DL sintak di bab 4

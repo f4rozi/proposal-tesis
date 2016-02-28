@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Slide Presentasi Tesis</title>
+	<link rel="stylesheet" href="bower_components/reveal.js/css/reveal.css">
+	<link rel="stylesheet" href="bower_components/reveal.js/css/theme/sky.css">
+	<link rel="stylesheet" href="assets/css/monokai.css" id="highlight-theme">
+	<link rel="stylesheet" href="assets/css/style.css">
+
+	<script src="bower_components/reveal.js/lib/js/head.min.js"></script>
+	<script src="bower_components/reveal.js/js/reveal.js"></script>
+</head>
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section id="cover" data-state="gotoArchitecture">
+				<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+				<h5>Presentasi Tesis</h5>
+				<h6>Sistem <em>Question Answering</em> Data Kabupaten <br/>di Nusa Tenggara Barat Berbasis <em>Multi-Ontologi</em></h6>
+				<p>&nbsp;</p>
+				<p>Oleh</p>
+				<p>&nbsp;</p>
+				<h5>Syamsul Muttaqin</h5>
+				<h5>11/323285/PPA/03632</h5>
+			</section>
+			<!-- BAB 1 -->
+			<section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Latar Belakang</h6>
+					<ul>
+						<li class="fragment fade-in">
+							Propinsi Nusa Tenggara Barat terdiri dari 8 buah kabupaten dan kota yang tersebar di pulau Lombok dan Sumbawa
+						</li>
+						<li class="fragment fade-in">
+							NTB memiliki berbagai potensi kekayaan alam seperti pertanian, perikanan, kelautan dan pariwisata yang tersebar di hampir semua kabuaten dan kota
+						</li>
+						<li class="fragment fade-in">
+							Masing-masing kabupaten dilengkapi dengan website masing-masing untuk menyajikan informasi mengenai kabuaten/kota yang bersangkutan
+						</li>
+					</ul>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Latar Belakang (Lanjutan)</h6>
+					<ul>
+						<li>
+							Informasi yang terdapat di dalam website masing-masing kabupaten hanya bersifat informasi formal dan tidak komprhensif
+						</li>
+						<li class="fragment fade-in">
+							Kemampuan fasilitas pencarian pada masing-masing website tidak memadai
+						</li>
+						<li class="fragment fade-in">
+							Solusi yang dapat digunakan adalah dengan membangun sistem <em>question answering</em> berbasis teknologi semantic web
+						</li>
+					</ul>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Rumusan masalah</h6>
+					<ul>
+						<li class="fragment">
+							Bagaimana membangun sebuah sistem question answering dengan menggunakan multi-ontologi sebagai sumber pengetahuannya
+						</li>
+						<li class="fragment">
+							Bagaimana mengkolaborasikan data dari berbagai sumber ontologi yang berbeda
+						</li>
+					</ul>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Rumusan masalah (lanjutan)</h6>
+					<ul>
+						<li class="fragment">
+							Apakah sistem <em>question answering</em> mampu melakukan query terhadap sumber ontologi yang berbeda serta mampu mengkolaborasikan data-data yang berasal dari ontologi yang akan dibangun dengan data yang berasal dari <b>DBPedia Indonesia</b>
+						</li>
+						<li class="fragment">
+							Apakah sistem <em>question answering</em> mampu memahami berbagai ekspresi OWL- DL melalui proses reasoning
+						</li>
+					</ul>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Batasan masalah</h6>
+					<ul>
+						<li class="fragment"> 
+							Data kabupaten yang akan digunakan untuk membentuk ontologi adalah kabupaten Lombok Timur, Lombok Tengah dan Lombok Barat yang akan diambil dari website masing-masing kabupaten serta data-data tambahan yang terdapat di dalam laman wikipedia Indonesia
+						</li>
+						<li class="fragment"> 
+							Struktur kata kunci pencarian berupa kalimat tanya tunggal yang sesuai dengan aturan tata bahasa Indonesia baku 
+						</li>
+						<li class="fragment"> 
+							Sumber data lain yang akan digunakan untuk menambahkan data individual di dalam ontologi hanya dari DBPedia Indonesia.
+						</li>
+					</ul>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Batasan masalah (lanjutan)</h6>
+					<ul>
+						<li class="fragment"> 
+							Sistem hanya akan memproses pertanyaan yang bersifat informatif dan tidak akan memproses pertanyaan yang melibatkan perhitungan seperti ``berapa'' dan ``kapan''
+						</li>
+						<li class="fragment"> 
+							Ontologi yang akan dikembangkan menggunakan ekspresi OWL-DL
+						</li>
+					</ul>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Tujuan penelitian</h6>
+					<p>
+						Membangun sistem <em>question answering</em> data kabupaten di Nusa Tenggara Barat berbasis semantik web untuk domain pariwisata, perintahan dan geografi, serta membangun masing-masing ontologi domain tersebut dengan standar OWL 2
+					</p>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Manfaat penelitin</h6>
+					<ul>
+						<li class="fragment">
+							Memudahkan pengguna untuk melakukan pencarian informasi tentang kabupaten <b>Lombok Timur</b>, <b>Lombok Tengah</b> dan <b>Lombok Barat</b> dengan menggunakan bahasa alami sebagai kata kunci pencarian
+						</li>
+						<li class="fragment">
+							Membantu pemerintah daerah Nusa Tenggara Barat dalam menyediakan aplikasi pencarian informasi secara komprehensif sesuai dengan domain yang dibangun
+						</li>
+						<li class="fragment">
+							Menambah khazanah ilmu pengetahuan di bidang <em>question answering</em> terutama berbasis semantik web yang memanfaatkan kekuatan ekspresi pengetahuan OWL-DL
+						</li>
+					</ul>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Metodologi penelitian</h6>
+					<ol>
+						<li class="fragment">Studi Literatur</li>
+						<li class="fragment">Pengumpulan data</li>
+						<li class="fragment">Anslisis dan perancangan sistem</li>
+						<li class="fragment">Implementasi hasil perancangan</li>
+						<li class="fragment">Pengujian</li>
+						<li class="fragment">Penarikan kesimpulan</li>
+					</ol>
+				</section>
+			</section>
+			<!-- BAB 2 -->
+			<section>
+				<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+				<h6>Tinjauan pustaka</h6>
+				<table>
+					<tr>
+						<th>No</th>
+						<th>Nama</th>
+						<th>Tahun</th>
+						<th>Tipe</th>
+						<th>Sumber pengetahuan</th>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>Angele <em>et al</em></td>
+						<td>2003</td>
+						<td>QA</td>
+						<td>Ontologi Tuggal</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Guo dan Zhang</td>
+						<td>2006</td>
+						<td>QA</td>
+						<td>tunggal dan web</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>Lopez <em>et al</em></td>
+						<td>2009</td>
+						<td>QA</td>
+						<td>Multi-ontologi</td>
+					</tr>
+					<tr>
+						<td>4</td>
+						<td>Marriot <em>et al</em></td>
+						<td>2012</td>
+						<td>Web Portal</td>
+						<td>Multi-ontologi</td>
+					</tr>
+					<tr>
+						<td>5</td>
+						<td>Abdullah dan Rehab</td>
+						<td>2011</td>
+						<td>QA</td>
+						<td>Ontologi Tunggal</td>
+					</tr>
+					<tr>
+						<td>6</td>
+						<td>Bendi</td>
+						<td>2010</td>
+						<td>QA</td>
+						<td>Ontologi Tunggal</td>
+					</tr>
+					<tr>
+						<td>7</td>
+						<td>Suryawan</td>
+						<td>2013</td>
+						<td>QA</td>
+						<td>Onologi Tunggal</td>
+					</tr>
+					<tr>
+						<td>8</td>
+						<td>Muttaqin</td>
+						<td>2013</td>
+						<td>QA</td>
+						<td>Multi Ontologi</td>
+					</tr>
+				</table>
+			</section>
+			<!-- BAB 3 -->
+			<section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Landasan teori</h6>
+					<ul>
+						<li class="fragment fade-in">Bahasa</li>
+						<li class="fragment fade-in">Pengolahan bahasa alami
+							<ul>
+								<li class="fragment fade-in">Pembentukan token</li>
+								<li class="fragment fade-in"><em>POS Tagging</em></li>
+								<li class="fragment fade-in">Pembentukan <em>Parse Tree</em></li>
+							</ul>
+						</li>
+						<li class="fragment fade-in">Ontologi
+							<ul>
+								<li class="fragment fade-in">Metode Pengembangan</li>
+								<li class="fragment fade-in">OWL 1 dan 2</li>
+								<li class="fragment fade-in">OWL <em>Reasoning</em></li>
+							</ul>
+						</li>
+						<li class="fragment fade-in">SPARQL</li>
+						<li class="fragment fade-in">SPARQL-DL</li>
+					</ul>
+				</section>
+				<!-- <section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Bahasa</h6>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Pengolahan bahasa alami</h6>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6><em>Parsing</em></h6>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>OWL Ontologi</h6>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Ontologi <em>Reasoing</em></h6>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Query SPARQL</h6>
+				</section> -->
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>SPARQL-DL</h6>
+					<div class="img-container">
+						<img src="assets/images/SPARQL-DL.png">
+					</div>
+				</section>
+			</section>
+			<!-- BAB 4 -->
+			<section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Analisis dan Perancangan Sistem</h6>
+					<ul>
+						<li class="fragment">
+							Sistem harus mampu mengenali ontologi dengan domain yang berbeda
+						</li>
+						<li class="fragment">
+							Pemrosesan bahasa alami tidak boleh terikat pada domain tertentu (bersifat universal)
+						</li>
+						<li class="fragment">
+							Sistem berbasis web
+						</li>
+						<li class="fragment">
+							Sistem melibatkan satu buah pengguna yaitu <em>user</em> yang akan mencari informasi
+						</li>
+						<li class="fragment">
+							Server menggunakan arsitektur <em>RESTFul</em> untuk memudahkan pengembangan multi platform
+						</li>
+						<li class="fragment">
+							Respon server dalam bentuk objek JSON
+						</li>
+						<li class="fragment">
+							Ontologi di letakkan pada alamat yang berbeda dan diakses melalui protokol HTTP
+						</li>
+					</ul>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Gambaran umum sistem</h6>
+					<div class="img-container">
+						<img src="assets/images/gambaran-umum-sistem.png" alt="">
+					</div>
+					<ol>
+						<li class="fragment">Proses tokenisasi</li>
+						<li class="fragment">Proses pembentukan <em>parse tree</em> dan <em>mapping</em></li>
+						<li class="fragment">Proses <em>query</em> ontologi</li>
+					</ol>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Arsitektur Sistem</h6>
+					<div class="img-container">
+						<img src="assets/images/arsitektur-sistem.png" alt="">
+					</div>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Modul server sistem</h6>
+					<div class="img-container">
+						<img src="assets/images/overview-package.png" alt="">
+					</div>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Alur proses <em>query</em></h6>
+					<div class="img-container">
+						<img src="assets/images/activity-diagram.png" alt="">
+					</div>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Algoritma Tokenisasi</h6>
+					<ol>
+						<li class="fragment">
+							Transformasi kalimat menjadi token kata
+						</li>
+						<li class="fragment">
+							Jika token berupa angka, maka berikan tipe kata <b>Numeral</b> dan lanjut ke token berikutnya
+						</li>
+						<li class="fragment">
+							Jika token berupa alfabet maka cek tipe kata ke dalam database, jika ditemukan maka berikan tag dan lanjut ke token berikutnya
+						</li>
+						<li class="fragment">
+							Jika tipe kata tidak ditemukan maka lakukan proses analisa morfologi sesuai dengan aturan tata bahasa Indonesia yang dimuat oleh Alwi <em>et al</em> dan lakukan pengecekan tipe kata ke dalam database
+						</li>
+						<li class="fragment">
+							Jika proses morfologi tidak berhasil maka tandai kata sebagai kata benda <b>(Nomina)</b>
+						</li>
+					</ol>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Algoritma pembentukan <em>parse tree</em></h6>
+					<ol>
+						<li class="fragment">
+							Bentuk frasa dari daftar token yang telah melalui proses tokenisasi
+						</li>
+						<li class="fragment">
+							Tentukan fungsi sintaksis masing-masing frasa
+								<ul>
+									<li class="fragment">
+										Cari predikat kalimat
+									</li>
+									<li class="fragment">
+										Tentukan fungsi kata/frasa di sebelah kiri dan kanan predikat
+									</li>
+								</ul>
+						</li>
+					</ol>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Algoritma <em>mapping parse tree</em></h6>
+					<ol>
+						<li class="fragment">
+							Cek apakah konstituen frasa memiliki representasi di dalam ontologi
+						</li>
+						<li class="fragment">
+							Jika ada maka beri tag sesuai dengan tipe di dalam ontologi <b>(OWLClass/Datatype Property/Object Property/Individual)</b>
+						</li>
+						<li class="fragment">
+							Cek apakah ada konstituen sebelumnya, jika ada maka lakukan penggabungan terhadap semua konstituen sebelumnya dan cek ke dalam ontologi
+						</li>
+						<li class="fragment">
+							Jika ada berikan tag sesuai dengan tipe di dalam ontologi dan tambahkan sebagai konstituen frasa yang baru
+						</li>
+						<li class="fragment">
+							Jika representasi konstituen tidak ditemukan di dalam ontologi maka buang konstituen tersebut dari <em>list</em>
+						</li>
+					</ol>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Algoritma <em>query</em> ontologi</h6>
+					<ol>
+						<li class="fragment">Analisa pola <em>parse tree</em> yang sudah di <em>mapping</em></li>
+						<li class="fragment">Bentuk query SPARQL-DL</li>
+						<li class="fragment">Bentuk query SPARQL untuk semua individual hasil query SAPRQL-DL</li>
+						<li class="fragment">Lakukan query terhadap dataset</li>
+						<li class="fragment">Jika Individual merupakan <em>instance</em> dari DBPedia, maka lakukan <em>query</em> terhadap <em>Endpoint</em> DBPedia Indonesia</li>
+					</ol>
+				</section>
+			</section>
+			<!-- BAB 5 -->
+			<section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>IRI dan Kompleksitas Ekspresi Ontologi</h6>
+					<div class="img-container-v">
+						<img src="assets/images/ontopar-iri.png" alt="">
+						<img src="assets/images/ontogov-iri.png" alt="">
+						<img src="assets/images/ontogeo-iri.png" alt="">
+					</div>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Implementasi <em>Class</em> Ontologi</h6>
+					<div class="img-container-v">
+						<img src="assets/images/class-tree-ontopar.png" alt="">
+						<img src="assets/images/class-tree-ontogov.png" alt="">
+						<img src="assets/images/class-tree-ontogeo.png" alt="">
+					</div>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Implementasi <em>Object Property</em> Ontologi</h6>
+					<div class="img-container-v">
+						<img src="assets/images/ontopar-op.png" alt="">
+						<img src="assets/images/ontogeo-op.png" alt="">
+						<img src="assets/images/ontogov-op.png" alt="">
+					</div>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Implementasi <em>Dtatype Property</em> Ontologi</h6>
+					<div class="img-container-v">
+						<img src="assets/images/ontopar-dp.png" alt="">
+						<img src="assets/images/ontogeo-dp.png" alt="">
+						<img src="assets/images/ontogov-dp.png" alt="">
+					</div>
+				</section>
+				<section>
+	<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+	<h6>Objek JSON respon server</h6>
+<pre><code data-trim class="json hljs">
+{
+    "code": ​200,
+    "message": "OK",
+    "answer": {
+    	"text": "Bupati Kabupaten Lombok Timur adalah Ali Bin Dahlan",
+    	"inferedFacts": [
+    	   {
+    		"about": "Ali Bin Dahlan",
+    		"data": {
+    			"headOf": "Kabupaten Lombok Timur",
+    			"nama": "Muhammad Ali bin Dahlan",
+    			"comment": "Ali Bin Dahlan adalah bupati kabupaten lombok timur yang berasal dari Desa Labuhan Haji Lombok Timur"
+    		}
+    	   },
+    	   {
+    	   	"about": "Lombok Timur",
+    	   	"data": {
+                   "label": "Kabupaten Lombok Timur",
+                   "comment": "Kabupaten Lombok Timur adalah salah satu Daerah Tingkat II di Provinsi Nusa Tenggara Barat yang terletak di sebelah timur Pulau Lombok. Ibu kota daerah ini ialah kota Selong. Kabupaten ini memiliki luas wilayah 1.60555 km dengan populasi 1.012.853 jiwa.",
+                   "depiction": "http://upload.wikimedia.org/wikipedia/commons/3/36/Lambang_Kabupaten_Lombok_Timur.jpeg",
+                   "nama": "Kabupaten Lombok Timur",
+                   "lambang": "80",
+                   "peta": "300",
+                   "koordinat": "116",
+                   "motto": "Patuh Karya",
+                   "ibukota": "Selong",
+                   "dau": "Rp. 932.462.555.000.-",
+                   "luas": "160555",
+                   "penduduk": "1068486",
+                   "web": "http://www.lomboktimurkab.go.id/",
+                   "utara": "Laut Jawa",
+                   "selatan": "Samudra Hindia",
+                   "barat": "Kabupaten Lombok Tengah dan Kabupaten Lombok Barat",
+                   "timur": "Selat Alas",
+                   "kecamatan": "20",
+                   "kelurahan": "96",
+                   "propinsi": "Nusa Tenggara Barat",
+                   "kepadatan": "651",
+                   "kodearea": "376",
+                   "kepalaDaerah": "Bupati",
+                   "namaKepalaDaerah": "Drs. HM. Sukiman Azmy MM"
+            	}
+            }
+        ]
+    }
+}</code></pre>
+</section>
+			<section>
+				<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+				<h6>Implementasi Antar Muka</h6>
+				<div class="img-container">
+					<img src="assets/images/hasil_pengujian_sistem_2.png" alt="">
+				</div>
+			</section>
+			</section>
+			<!-- BAB 6 -->
+			<section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Hasil Penelitian</h6>
+					<ol>
+						<li>
+							Pengujian konsistensi ontologi
+							<ul>
+								<li >Pengujian masing-masing ontologi</li>
+								<li>Pengujian <em>merged</em> ontologi</li>
+							</ul>
+						</li>
+						<li>
+							Pengujian kemampuan pemahaman dan pemrosesan bahasa
+							<ul>
+								<li>Tokenisasi dan analisa morfologi</li>
+								<li>Pembentukan <em>parse tree</em></li>
+								<li><em>Mapping</em></li>
+							</ul>
+						</li>
+					</ol>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Hasil Penelitian (Lanjutan)</h6>
+					<ol>
+						<li>
+							Pengujian kemampuan query SPARQL dan SPARQL-DL dan <em>Reasoning</em>
+							<ul>
+								<li>Klasifikasi individual</li>
+								<li><em>owl:sameAs</em> Individual</li>
+								<li><em>Transitive property</em></li>
+								<li><em>Equivalent property</em></li>
+							</ul>
+						</li>
+					</ol>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Pengujian Konsistensi Ontologi</h6>
+					<div class="img-container-v">
+						<img src="assets/images/hasil_pengujian_ontologi_individual.png" alt="">
+					</div>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Pengujian konsistensi <em>merged</em> Ontologi</h6>
+					<div class="img-container-v">
+						<img src="assets/images/hasil_pengujian_ontologi_merged.png" alt="">
+					</div>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Hasil pengujian Parser</h6>
+					<div class="img-container-v">
+						<img src="assets/images/hasil_pengujian_parser_PS.png" alt="">
+					</div>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Pengujian <em>Reasoning</em> (Klasifikasi)</h6>
+					<div class="img-container-v">
+						<img src="assets/images/definisi_bupati.png" alt="">
+					</div>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Pengujian <em>Reasoning</em> (Klasifikasi)</h6>
+					<div class="img-container-v">
+						<img src="assets/images/statement_bupati.png" alt="">
+					</div>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Hasil pengujian <em>Reasoning</em> (Klasifikasi)</h6>
+					<div class="img-container-v">
+						<img src="assets/images/hasil_pengujian_sistem_1.png" alt="">
+					</div>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Hasil pengujian <em>reasoning</em> (Klasifikasi)</h6>
+					<div class="img-container-v">
+						<img src="assets/images/hasil_pengujian_sistem_2.png" alt="">
+					</div>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>pengujian <em>reasoning (same As)</em></h6>
+					<div class="img-container-v">
+						<img src="assets/images/statement_owl_same_as.png" alt="">
+					</div>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>pengujian <em>reasoning (transitive)</em></h6>
+					<div class="img-container-v">
+						<img src="assets/images/statement_transitive_property.png" alt="">
+					</div>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>pengujian <em>reasoning (transitive)</em></h6>
+					<div class="img-container-v">
+						<img src="assets/images/statement_letak_pantai_pink.png" alt="">
+					</div>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>pengujian <em>reasoning (transitive)</em></h6>
+					<div class="img-container-v">
+						<img src="assets/images/statement_letak_jerowaru.png" alt="">
+					</div>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>pengujian <em>reasoning (transitive)</em></h6>
+					<div class="img-container-v">
+						<img src="assets/images/hasil_pengujian_sistem_4.png" alt="">
+					</div>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>pengujian <em>reasoning (equivalent property)</em></h6>
+					<div class="img-container-v">
+						<img src="assets/images/statement_letak_pantai.png" alt="">
+					</div>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>pengujian <em>reasoning (equivalent property)</em></h6>
+					<div class="img-container-v">
+						<img src="assets/images/hasil_pengujian_sistem_3.png" alt="">
+					</div>
+				</section>
+			</section>
+			<!-- BAB 7 -->
+			<section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Kesimpulan</h6>
+					<ul>
+						<li class="fragment">
+							Sistem <em>question answering</em> berbasis multi-ontologi telah berhasil dikembangkan
+						</li>
+						<li class="fragment">
+							Parser bahasa yang dikembangkan dalam penelitian ini bersifat universal dan tidak terikat pada domain tertentu
+						</li>
+						<li class="fragment">
+							Sistem <em>question answering</em> mampu menemukan jawaban dari berbagai sumber ontologi yang berbeda, baik secara terpisah maupun secara simultan
+						</li>
+						<li class="fragment">
+							Sistem <em>question answering</em> mampu membentuk jawaban atas pertanyaan dalam bentuk rangkuman singkat serta mampu memberikan informasi tambahan terhadap individual-individual yang berhasil di query
+						</li>
+					</ul>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Kesimpulan (lanjutan)</h6>
+					<ul>
+						<li class="fragment">
+							Sistem <em>question answering</em> mampu membedakan pertanyaan yang memiliki makna jamak dan tunggal
+						</li>
+						<li class="fragment">
+							Sistem <em>question answering</em> yang telah dibangun mampun mengekstraksi jawaban dari data yang bersifat eksplisit maupun implisit di dalam ontologi melalui proses <em>reasoning</em>
+						</li>
+						<li class="fragment">
+							Sistem mampu memahami ekspresi kelas dan properti yang merupakan fitur dari OWL 2 seperti realisasi keanggotaan kelas kompleks <em>(complex class expression)</em> serta mampu menelusuri graph yang memiliki relasi melalui objek properti yang bersifat transitif
+						</li>
+					</ul>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Kesimpulan (lanjutan)</h6>
+					<ul>
+						<li class="fragment">
+							Sistem <em>question answering</em> dapat melakukan pencarian informasi tambahan pada sumber lain selain ontologi yang telah dibangun seperti DBPedia Indonesia apabila individual tersebut memiliki relasi <em>owl:sameAs</em> dengan individual yang berasal dari DBPedia Indonesia
+						</li>
+						<li class="fragment">
+							Hasil <em>merging</em> terhadap ketiga ontologi sumber pengetahuan tidak mengakibatkan terjadinya inkonsistensi pada ontologi yang baru, sehingga keakuratan jawaban yang diberikan oleh sistem dapat dipertanggungjawabkan.
+						</li>
+					</ul>
+				</section>
+				<section>
+					<img id="logo-kampus" src="assets/images/ugm.png" alt="">
+					<h6>Saran</h6>
+					<ol>
+						<li class="fragment">
+							Sistem gagal membentuk <em>parse tree</em> yang disebabkan oleh kesalahan sistem dalam menentukan tipe kata, untuk itu database lexicon perlu diperkaya lagi
+						</li>
+						<li class="fragment">
+							Seluruh rangkaian proses dilakukan secara berurutan sehingga lebih lambat, proses query dapat dilakukan secara asinkron
+						</li>
+					</ol>
+				</section>
+			</section>
+			<section>
+				<img id="logo-kampus-last" src="assets/images/ugm.png" alt="">
+				<p>&nbsp;</p>
+				<h5>Terima kasih</h5>
+			</section>
+		</div>
+	</div>
+	<script src="assets/js/slide.js"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+\subsection{Ontologi geografi}
+Ontologi geografi secara spesifik menyimpan fakta-fakta geografis masing-masing daerah. Cakupan informasi yang ingin dicapai dalam ontologi geografi yaitu informasi geografis mulai dari tingkat desa hingga tingkat provinsi. Adapun informasi yang akan dimuat diantaranya adalah informasi mengenai letak geografis, populasi, kepadatan penduduk hingga komoditas asli masing-masing daerah.
+
+Kelas yang akan dibangun dalam ontologi geografi disajikan dalam Tabel \ref{tab:ontogeo_class}. Kelas \emph{Provinsi, Kabupaten, Kota, Kecamatan, Desa, Kota} dan \emph{Komoditas} bersifat \emph{disjoint} sedangkan untuk kelas \emph{Ibu\_kota} bersifat \emph{disjoint} dengan semua kelas kecuali kelas \emph{Kota}, hal ini bertujuan untuk mengakomodasi fakta bahwa terdapat nama kota yang sekaligus berfungsi sebagai ibu kota, seperti misalnya kota \emph{mataram} yang memiliki ibu kota yang sama yaitu \emph{mataram}. Selain itu, kelas \emph{Ibu\_kota\_kabupaten} dan \emph{Ibu\_kota\_provinsi} merupakan kelas spesifik yang memiliki restriksi seperti yang disajikan dalam Tabel \ref{tab:ontogeo_class}, sehingga individual dari kelas ini bersifat implisit yang dihasilkan melalui proses \emph{reasoning}. Selain bersifat \emph{disjoint}, kelas \emph{Komoditas} hanya dapat memiliki anggota atau individual yang telah ditetapkan, oleh karena itu kelas ini bertipe \emph{enum} yang hanya dapat memiliki individual \emph{Perikanan, Perkebunan, Pertambangan, Pertanian} dan \emph{Peternakan}. Kelas \emph{Ibu\_kota} juga memiliki restriksi tambahan yaitu individual kelas ini adalah semua individual yang memiliki hubungan \emph{isCapitalOf} dengan indvidual kelas \emph{Kota}. 
+
+\begin{longtabu}{|c|l|X|}
+	\caption{Daftar kelas ontologi geografi}\label{tab:ontogeo_class} \\ \hline
+	\textbf{No} & \textbf{Nama Kelas} & \textbf{Ekspresi Restriksi} \\ \hline
+	\endfirsthead
+	\multicolumn{3}{c}%
+	{\tablename\ \thetable\ {(lanjutan)}}\\ \hline
+	\textbf{No} & \textbf{Nama Kelas} & \textbf{Ekspresi Restriksi} \\ \hline
+	\endhead
+	1	& 	Provinsi	&	\begin{math} \lnot(Kabupaten \cup Kota \cup Kecamatan \cup Desa \cup \newline Komoditas) \end{math} \\ \hline
+	2	&	Kabupaten	&	\begin{math} \lnot(Provinsi \cup Kota \cup Kecamatan \cup Desa \cup \newline Komoditas) \end{math} \\ \hline
+	3	&	Kota 	&	\begin{math} \lnot(Kabupaten \cup Provinsi \cup Kecamatan \cup Desa \cup \newline Komoditas) \end{math} \\ \hline
+	4	&	Kecamatan	&	\begin{math} \lnot(Kabupaten \cup Kota \cup Provinsi \cup Desa \cup \newline Komoditas) \end{math} \\ \hline
+	5	&	Desa	&	\begin{math} \lnot(Kabupaten \cup Kota \cup Kecamatan \cup Provinsi \cup Komoditas) \end{math} \\ \hline
+	6	&	Ibu\_kota	&	\begin{math} \equiv (\exists isCapitalOf.Kota \subseteq \top) \cap (\lnot(Kabupaten \cup Kota \cup Kecamatan \cup Desa \cup Komoditas)) \end{math}\\ \hline
+	7	&	Komoditas	&	\begin{math} \{Perikanan\} \cup \{Perkebunan\} \cup \newline \{Pertambangan\} \cup \{Pertanian\} \cup \{Peternakan\} \end{math} \\ \hline
+	8	&	Ibu\_kota\_kabupaten	&	\begin{math} \subseteq Ibu\_kota \end{math} \newline \begin{math} \lnot Ibu\_kota\_provinsi \end{math} \newline \begin{math} \equiv \exists isCapitalOf.Kabupaten \subseteq \top \end{math} \\ \hline
+	9	&	Ibu\_kota\_provinsi		&	\begin{math} \subseteq Ibu\_kota \end{math} \newline \begin{math} \lnot Ibu\_kota\_kabupaten \end{math} \newline \begin{math} \equiv \exists isCapitalOf.Provinsi \subseteq \top \end{math} \\ \hline
+\end{longtabu}
+
+Kelas \emph{Ibu\_kota\_kabupaten} dan \emph{Ibu\_kota\_provinsi} merupakan sub kelas dari \emph{Ibu\_kota} dimana kedua kelas ini bersifat lebih spesifik untuk mendefinisikan individual yang merupakan ibu kota dari provinsi dan kabupaten. Meskipun dalam aturan restriksi tidak diberikan secara langsung mengenai sifat \emph{disjoint} dengan kelas \emph{Provinsi, Kabupaten, Kecamatan, Desa} dan \emph{Komoditas}, namun karena kelas tersebut merupakan sub kelas dari \emph{Ibu\_kota} maka secara tidak langsung keduanya juga bersifat \emph{disjoint} dengan kelas-kelas tersebut.
+
+Kata kunci yang diperkirakan akan sering digunakan dalam membentuk pertanyaan seputar geografi diantaranya adalah alamat, letak, komoditas, kepadatan penduduk, kode pos, luas wilayah, lambang kabupaten, jumlah populasi penduduk, nomer telepon dan website. Oleh karena itu, kata-kata tersebut dijadikan sebagai properti dalam ontologi geografi. Kata-kata yang sekiranya behubungan dengan individual dalam kelas dijadikan sebagai \emph{Object property} (lihat Tabel \ref{tab:ontogeo_op}), sedangkan kata-kata yang berhubungan dengan nilai satuan baik berupa string maupun angka dijadikan sebagai \emph{Datatype property} (lihat Tabel \ref{tab:ontogeo_dp}).
+
+\begin{longtabu}{|c|l|X|}
+	\caption{Daftar \emph{Object property} ontologi geografi}\label{tab:ontogeo_op} \\ \hline
+	\textbf{No} & \textbf{Nama Properti} & \textbf{Ekspresi Restriksi} \\ \hline
+	\endfirsthead
+	\multicolumn{3}{c}%
+	{\tablename\ \thetable\ {(lanjutan)}} \\ \hline
+	\textbf{No} & \textbf{Nama Properti} & \textbf{Ekspresi Restriksi} \\ \hline
+	\endhead
+	1	&	terletak\_di	&	- \\ \hline
+	2	& 	bagain\_dari	&	- \\ \hline 
+	3	&	ibu\_kota\_dari	&	- \\ \hline
+	4	&	komoditas\_asli	&	- \\ \hline
+	5	&	hasHead	&	\begin{math} headOf^- \end{math} \\ \hline
+	6	&	headOf	&	\begin{math} hasHead^- \end{math} \\ \hline
+	7	&	hasCapital 	&	\begin{math} isCapitalOf^- \end{math} \\ \hline
+	8	&	hasPart	&	\begin{math} isPartOf^- \end{math} \\ \hline
+	9	&	isPartOf	& \begin{math} \subseteq bagian\_dari \end{math} \newline \begin{math} hasPart^- \end{math} \\ \hline
+	10	&	ada\_di	&	\begin{math} \subseteq terletak\_di \end{math}\newline \begin{math} \equiv (berada\_di \cup hasLocation \cup letak) \end{math} \\ \hline
+	11	&	berada\_di	&	\begin{math} \subseteq terletak\_di \end{math}\newline \begin{math} \equiv (hasLocation \cup letak \cup ada\_di) \end{math} \\ \hline
+	12	&	hasLocation	&	\begin{math} \subseteq terletak\_di \end{math}\newline \begin{math} \equiv (berada\_di \cup letak \cup ada\_di) \end{math} \\ \hline
+	13	&	letak	&	\begin{math} \subseteq terletak\_di \end{math}\newline \begin{math} \equiv (berada\_di \cup hasLocation \cup ada\_di) \end{math} \\ \hline
+	14	&	isCapitalOf	&	\begin{math} hasCapital^- \end{math}\newline \begin{math} \subseteq ibu\_kota\_dari \end{math} \\ \hline
+	15	&	hasCommodity	&	\begin{math} \subseteq komoditas\_asli \end{math} \\ \hline
+\end{longtabu}
+
+\begin{longtabu}{|c|l|X|}
+	\caption{Daftar \emph{Datatype property} ontologi geografi}\label{tab:ontogeo_dp} \\ \hline
+	\textbf{No} & \textbf{Nama Properti} & \textbf{Ekspresi Restriksi} \\ \hline
+	\endfirsthead
+	\multicolumn{3}{c}%
+	{\tablename\ \thetable\ {(lanjutan)}} \\ \hline
+	\textbf{No} & \textbf{Nama Properti} & \textbf{Ekspresi Restriksi} \\ \hline
+	\endhead
+	1	& 	alamat	&	- \\ \hline 
+	2	&	kepadatan\_penduduk 	&	- \\ \hline
+	3	&	kode\_pos	&	- \\ \hline
+	4	&	lambang	&	- \\ \hline
+	5	&	luas\_wilayah	&	- \\ \hline
+	6	&	motto	&	- \\ \hline
+	7	&	populasi	&	- \\ \hline
+	8	&	telepon	&	- \\ \hline
+	9	&	website	&	- \\ \hline
+	10	&	hasAddress	&	\begin{math} \subseteq alamat \end{math} \\ \hline
+	4	&	hasDensity	&	\begin{math} \subseteq kepadatan\_penduduk \end{math} \\ \hline
+	6	&	postCode	&	\begin{math} \subseteq kode\_pos \end{math} \\ \hline
+	8	&	simbol	&	\begin{math} \equiv hasSymbol \end{math} \newline \begin{math} \subseteq lambang \end{math} \\ \hline
+	9	&	hasSymbol	&	\begin{math} \equiv simbol \end{math} \newline \begin{math} \subseteq lambang \end{math} \\ \hline
+	11	&	hasArea	&	\begin{math} \subseteq luas\_wilayah \end{math} \\ \hline
+	13	&	hasMotto	&	\begin{math} \subseteq motto \end{math} \\ \hline
+	15	&	hasPopulation	&	\begin{math} \subseteq populasi \end{math} \\ \hline
+	16	&	telp	&	\begin{math} \equiv hasPhone \end{math} \newline \begin{math} \subseteq telepon \end{math} \\ \hline
+	17	&	hasPhone	&	\begin{math} \equiv telp \end{math} \newline \begin{math} \subseteq telepon \end{math} \\ \hline
+	19	&	alamat\_website	&	\begin{math} \equiv hasWebsite \end{math} \newline \begin{math} \subseteq website \end{math} \\ \hline
+	20	&	hasWebsite	&	\begin{math} \equiv alamat\_website \end{math} \newline \begin{math} \subseteq website \end{math} \\ \hline
+\end{longtabu}
+
+Fakta geografis menunjukkan apabila desa \emph{x} terletak di dalam kecamatan \emph{y} dan kecamatan \emph{y} terletak di kabupaten \emph{z}, maka secara tidak langsung desa \emph{x} juga merupakan bagian dari kabupaten \emph{z}, untuk mengakomodir fakta tersebut maka properti \emph{terletak\_di} dan semua sub-propertinya diberikan sifat transitif.
